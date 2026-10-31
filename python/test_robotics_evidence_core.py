@@ -12,12 +12,12 @@ from robotics_evidence_core import (
 
 
 def test_taiwan_compliance_guard() -> None:
-    sample = "Call 0912-345-678 or visit 山鶯路157號 at 佳世達科技股份有限公司"
+    sample = "Operator contact: 0912-345-678, office 03-1234-5678, mail dev@example.org"
     detected, count, sanitized = TaiwanComplianceGuard.audit_and_redact(sample)
     assert detected is True
-    assert count >= 3
+    assert count == 3
     assert "0912-345-678" not in sanitized
-    assert "佳世達科技股份有限公司" not in sanitized
+    assert "dev@example.org" not in sanitized
 
 
 def test_preprocess_and_fusion() -> None:

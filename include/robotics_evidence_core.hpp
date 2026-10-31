@@ -36,11 +36,10 @@ public:
      *   - Space: O(L) for the sanitized output buffer.
      */
     static AuditReport audit_and_redact(const std::string& input) {
-        static const std::array<std::regex, 4> kPatterns = {
+        static const std::array<std::regex, 3> kPatterns = {
             std::regex(R"(\b09\d{2}[-\s]?\d{3}[-\s]?\d{3}\b)"),
             std::regex(R"(\b0[2-8][-\s]?\d{3,4}[-\s]?\d{4}\b)"),
-            std::regex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})"),
-            std::regex(R"((山鶯路157號|佳世達科技股份有限公司|Qisda\s*Corporation))", std::regex_constants::icase)
+            std::regex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})")
         };
 
         AuditReport report{false, 0, input};

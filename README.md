@@ -9,7 +9,7 @@
 > 1. **Robot Eyes & Ears (`MultiModalPerceptionProcessor` & `CrossModalSE3Fusion`)**: Our robot uses laser beams (**LiDAR**), regular cameras (**RGB**), depth cameras, and special heat-vision goggles (**LWIR Thermal**) plus an inner-ear balance sensor (**IMU**). When the robot moves fast, our C++ helper (`deskew_point_cloud_se3`) un-blurs the 3D dots so the robot doesn't bump into a moose!
 > 2. **Arms, Legs & Not Getting Too Sweaty (`NistWholeBodySafetyGovernor`)**: The robot practices walking and grabbing things inside a pretend 3D computer world (**NVIDIA Isaac / OpenUSD**). In the real world, our **NIST Cybersecurity Mountie** checks every millisecond that the robot's joints (**EtherCAT**) don't push too hard and its computer brain (**NVIDIA Jetson**) doesn't get too hot!
 > 3. **Playing Fair with Rare Obstacles (`LogitAdjustedBalancedLoss`)**: Since the floor is super big and tiny obstacles are super rare, we use special math so the robot never ignores the little things!
-> 4. **Keeping Secrets Safe Under Taiwan's Laws (`TaiwanComplianceGuard`)**: Before we share our code on **GitHub**, our safety guard scrubs out any private phone numbers, addresses, or company job-post text so everything is 100% legal in Taiwan. Beauty, eh!"
+> 4. **Keeping Secrets Safe (`TaiwanComplianceGuard`)**: Before we share our code on **GitHub**, our safety helper gently tidies up any private phone numbers or contact info so everyone's privacy stays safe and sound. Beauty, eh!"
 
 ---
 
@@ -38,7 +38,7 @@
 
 | NIST CSF 2.0 Function | Module / Function | Time Complexity | Space Complexity | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **GOVERN (GV) & IDENTIFY (ID)** | `TaiwanComplianceGuard::audit_and_redact` | $\mathcal{O}(L)$ | $\mathcal{O}(L)$ | Scans & redacts PII and copyrighted recruitment identifiers under Taiwan's PDPA & Copyright Act. |
+| **GOVERN (GV) & IDENTIFY (ID)** | `TaiwanComplianceGuard::audit_and_redact` | $\mathcal{O}(L)$ | $\mathcal{O}(L)$ | Redacts accidental contact details or sensitive log identifiers prior to export. |
 | **PROTECT (PR)** | `preprocess_rgbd_lwir_opencv` / `deskew_point_cloud_se3` | $\mathcal{O}(H \cdot W \cdot d^2)$ / $\mathcal{O}(N)$ | $\mathcal{O}(H \cdot W \cdot C)$ / $\mathcal{O}(N)$ | RAII-managed C++17 buffers and contiguous PyTorch tensors with zero memory leaks. |
 | **DETECT (DE) & RESPOND (RS)** | `NistWholeBodySafetyGovernor::process_and_actuate` | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ | Constant-time HMAC verification, anti-replay sequence check, watchdog & thermal/torque cutoff (STO). |
 | **RECOVER (RC)** | `NistWholeBodySafetyGovernor::attempt_recovery` | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ | Deterministic recovery to zero-torque operational standby after thermal cooldown margin. |
@@ -46,9 +46,6 @@
 
 ---
 
-## 5. Taiwan Legal Compliance (台灣法律合規聲明)
+## 5. Note on Open-Source Sharing & Privacy
 
-This repository is engineered in strict compliance with:
-- **Personal Data Protection Act (個人資料保護法 / PDPA)**: Zero personal contact details, phone numbers, or resumes are stored.
-- **Copyright Act (著作權法 § 10-1)**: Contains 100% original clean-room C++17 and Python implementations; no copyrighted recruitment text or corporate marketing photographs are included.
-- **Trade Secrets Act (營業秘密法)**: No proprietary CAD (`.prt`/`.asm`), internal calibration parameters, or confidential binaries are included.
+All code in this repository consists of self-contained C++17 and Python reference implementations built from public academic literature and official framework documentation. To keep the repository clean and respectful of local data-protection and intellectual-property norms in Taiwan, `.gitignore` and `TaiwanComplianceGuard` exclude personal contact information, third-party documents, and proprietary hardware/CAD assets from version control.

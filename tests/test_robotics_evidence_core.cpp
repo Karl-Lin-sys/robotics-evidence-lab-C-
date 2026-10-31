@@ -8,15 +8,15 @@
 int main() {
     using namespace robotics_evidence;
 
-    // 1. Test Taiwan Compliance Guard (PDPA & Copyright Redaction)
+    // 1. Test Taiwan Compliance Guard (Contact & Log Sanitization)
     {
         std::string raw_text =
-            "Contact HR at 0912-345-678 or桃園市龜山區山鶯路157號 at 佳世達科技股份有限公司.";
+            "Operator log: mobile 0912-345-678, office 03-1234-5678, mail dev@example.org.";
         auto report = TaiwanComplianceGuard::audit_and_redact(raw_text);
         assert(report.pii_or_secret_detected);
-        assert(report.redaction_count >= 3);
+        assert(report.redaction_count == 3);
         assert(report.sanitized_text.find("0912-345-678") == std::string::npos);
-        assert(report.sanitized_text.find("佳世達科技股份有限公司") == std::string::npos);
+        assert(report.sanitized_text.find("dev@example.org") == std::string::npos);
     }
 
     // 2. Test SE(3) IMU-Assisted Point Cloud Deskew

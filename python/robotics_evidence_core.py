@@ -28,7 +28,6 @@ class TaiwanComplianceGuard:
         re.compile(r"\b09\d{2}[-\s]?\d{3}[-\s]?\d{3}\b"),
         re.compile(r"\b0[2-8][-\s]?\d{3,4}[-\s]?\d{4}\b"),
         re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"),
-        re.compile(r"(山鶯路157號|佳世達科技股份有限公司|Qisda\s*Corporation)", re.IGNORECASE),
     )
 
     @classmethod
